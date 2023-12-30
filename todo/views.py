@@ -34,7 +34,6 @@ class ToDoViewSet(viewsets.ModelViewSet):
     serializer_class = TodoSerializer
     permission_classes = [] # permissions.IsAuthenticated
 
-
     def create(self, request):
         mydata = json.loads(request.body)
         print(mydata)
@@ -44,4 +43,8 @@ class ToDoViewSet(viewsets.ModelViewSet):
                                     ) 
         serialized_obj = serializers.serialize('json', [todo, ]) 
         return HttpResponse(serialized_obj, content_type='application/json')
+    
+    def get(self, request , format=None): 
+        todos = ToDo.objects.all()
+        return Response(todos) 
 
