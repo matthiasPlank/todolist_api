@@ -1,3 +1,4 @@
+from datetime import datetime , date
 import datetime
 from django.conf import settings
 from django.db import models
@@ -12,3 +13,7 @@ class ToDo(models.Model):
         User ,
         on_delete=models.CASCADE,
     )
+
+    def time_passed(self): 
+        today = date.today()
+        return (today - self.created_at).days
