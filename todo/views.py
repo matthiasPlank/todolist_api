@@ -11,6 +11,10 @@ from .models import ToDo
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated 
+
+
 class LoginView(ObtainAuthToken):
 
     def post(self, request, *args, **kwargs):
@@ -32,7 +36,8 @@ class ToDoViewSet(viewsets.ModelViewSet):
     """
     queryset = ToDo.objects.all().order_by('-created_at')
     serializer_class = TodoSerializer
-    permission_classes = [] # permissions.IsAuthenticated
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def create(self, request):
         mydata = json.loads(request.body)
