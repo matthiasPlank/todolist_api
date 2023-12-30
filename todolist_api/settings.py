@@ -130,3 +130,11 @@ MEDIA_ROOT = '/home/matthiasplank/todolist_api/media'
 MEDIA_URL = '/media/'
 STATIC_ROOT = '/home/matthiasplank/todolist_api/static'
 STATIC_URL = '/static/'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
