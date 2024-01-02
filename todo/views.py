@@ -49,7 +49,9 @@ class ToDoViewSet(viewsets.ModelViewSet):
         serialized_obj = serializers.serialize('json', [todo, ]) 
         return HttpResponse(serialized_obj, content_type='application/json')
     
-    def get(self, request , format=None): 
-        todos = ToDo.objects.all()
-        return Response(todos) 
+    
+    def get_queryset(self , format=None): 
+        todos = ToDo.objects.filter(author = self.request.user)
+        #serializer = TodoSerializer(todos, many=True)
+        return todos
 
